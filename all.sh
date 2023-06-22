@@ -21,21 +21,24 @@ STATDIR=$TOPDIR/stat
 # TODO: set the following params
 #-------------------------------------------------------------------------------
 # Set TARGET to the expriment folder (the subfolder under raw/)
-TARGET="lat1-bw"
+TARGET="lat1-lat"
 
 # Supported TYPE:
 # lat-cdf: Latency CDF graph
 # lat-time: Latency (Y-axis) vs Time (X-axis)
 # iops-time: IOPS (Y-axis) vs Time (X-axis)
 # bw-time: Bandwidth (Y-axis) vs Time (X-axis)
-TYPE="bw-time"
+TYPE="lat-time"
 #-------------------------------------------------------------------------------
 
 # combine log
-if [[ $TYPE="bw-time" || $TYPE="iops-time" ]]
+if [ "$TYPE" = "bw-time" ] || [ "$TYPE" = "iops-time" ];
 then
     python $SCRIPTDIR/combine.py $TARGET
-    echo "COMBINE"
+    # echo "COMBINE"
+else
+    python $SCRIPTDIR/average.py $TARGET
+    # echo "AVERAGE"
 fi
 
 # only needed when generating dat files

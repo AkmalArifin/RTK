@@ -66,8 +66,10 @@ case $TYPE in
         YLABEL="set ylabel \"Latency (ms)\""
         YGRID="set grid ytics lt 2 lc rgb \"gray\" lw 1"
         KEY="set key bmargin center horizontal"
-        X=1      # timestamp ms -> s, show in seconds
-        Y=2      # latency us -> ms, show in millionseconds
+        X="(\$1/1000)"      # timestamp ms -> s, show in seconds
+        Y="(\$2*0.000001)"  # latency ns -> ms, show in miliseconds
+        # X=1      # timestamp ms -> s, show in seconds
+        # Y=2      # latency us -> ms, show in millionseconds
         ;;
     "iops-time")
         TITLE="set title \"IOPS vs Time\""
@@ -76,8 +78,10 @@ case $TYPE in
         XLABEL="set xlabel \"Time (s)\\n\""
         YLABEL="set ylabel \" KIOPS\""
         KEY="set key bmargin center horizontal"
-        X=1      # timestamp ms -> s, show in seconds
-        Y=2      # IOPS shown as xx KIOPS
+        X="(\$1/1000)" 
+        Y="(\$2/1000)" # timestamp ms -> s, show in seconds
+        # X=1      # timestamp ms -> s, show in seconds
+        # Y=2      # IOPS shown as xx KIOPS
         ;;
         "bw-time")
         TITLE="set title \"Bandwidth vs Time\""
