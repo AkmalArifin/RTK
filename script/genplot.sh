@@ -79,6 +79,18 @@ case $TYPE in
         X=1      # timestamp ms -> s, show in seconds
         Y=2      # IOPS shown as xx KIOPS
         ;;
+        "bw-time")
+        TITLE="set title \"Bandwidth vs Time\""
+        XRANGE="set xrange [0:]"
+        YRANGE="set yrange [0:]"
+        XLABEL="set xlabel \"Time (s)\\n\""
+        YLABEL="set ylabel \"Bandwidth (MB/s)\""
+        KEY="set key bmargin center horizontal"
+        # X=1
+        # Y=2
+        X="(\$1/1000)"      # timestamp ms -> s, show in seconds
+        Y="(\$2*0.001024)"  # bandwidth KiB/s -> MB/s, show in megabyte per second
+        ;;
     *)
         echo "Unknown Type: $TYPE, exiting .."
         exit
@@ -87,7 +99,8 @@ esac
 
 TERM="set term postscript eps enhanced color 20"
 OUTPUT="set output \"eps/${TARGET}.eps\""
-SIZE="set size 1,.7"
+# SIZE="set size 1,.7"
+SIZE="set size 2,1.5"
 PLOT="plot \\"
 
 declare -a rgbcolors=(\"gray\" \"green\" \"blue\" \"magenta\" \"orange\"

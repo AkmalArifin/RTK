@@ -12,9 +12,9 @@ fi
 echo "Please confirm you want to delete [$input] entries! Type anything .."
 read x
 
-if [[ -e raw/$input ]]; then
-    rm -rf raw/$input
-fi
+# if [[ -e raw/$input ]]; then
+#     rm -rf raw/$input
+# fi
 
 if [[ -e dat/$input ]]; then
     rm -rf dat/$input

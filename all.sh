@@ -21,15 +21,22 @@ STATDIR=$TOPDIR/stat
 # TODO: set the following params
 #-------------------------------------------------------------------------------
 # Set TARGET to the expriment folder (the subfolder under raw/)
-TARGET="exptest"
+TARGET="lat1-bw"
 
 # Supported TYPE:
 # lat-cdf: Latency CDF graph
 # lat-time: Latency (Y-axis) vs Time (X-axis)
 # iops-time: IOPS (Y-axis) vs Time (X-axis)
-TYPE="lat-cdf"
+# bw-time: Bandwidth (Y-axis) vs Time (X-axis)
+TYPE="bw-time"
 #-------------------------------------------------------------------------------
 
+# combine log
+if [[ $TYPE="bw-time" || $TYPE="iops-time" ]]
+then
+    python $SCRIPTDIR/combine.py $TARGET
+    echo "COMBINE"
+fi
 
 # only needed when generating dat files
 $SCRIPTDIR/raw2dat.sh $TYPE $TARGET 0 1 0.0001
@@ -43,8 +50,5 @@ $SCRIPTDIR/getstat.sh $TARGET
 # plot the graph
 gnuplot $PLOTDIR/$TARGET.plot
 
-# Open the graph
-# TODO; Replace pdfreader with your PDF Reader software, e.g.,
-# evince/okular on Linux or Previewer on Mac
+# open the graph
 pdfreader $EPSDIR/$TARGET.eps
-

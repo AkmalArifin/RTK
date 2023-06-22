@@ -16,7 +16,7 @@ while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symli
 done
 
 TOPDIR="$( cd -P "$( dirname "$SOURCE" )/" && pwd )/.."
-RAWDIR=$TOPDIR/raw
+RAWDIR=$TOPDIR/combine
 DATDIR=$TOPDIR/dat
 SCRIPTDIR=$TOPDIR/script
 PLOTDIR=$TOPDIR/plot
@@ -73,6 +73,11 @@ function raw2dat_iops_time()
     gawk -F"," '{print $1, $2}' $1 > $2
 }
 
+function raw2dat_bw_time()
+{
+    gawk -F"," '{print $1, $2}' $1 > $2
+}
+
 
 
 ################################################################################
@@ -88,6 +93,9 @@ case $TYPE in
         ;;
     "iops-time")
         raw2dat_handler=raw2dat_iops_time
+        ;;
+    "bw-time")
+        raw2dat_handler=raw2dat_bw_time
         ;;
     *)
         echo "Unknown TYPE, exiting ..."
