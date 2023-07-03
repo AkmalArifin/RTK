@@ -1,5 +1,4 @@
 import os
-import sys
 
 def average_log(filename, foldername):
 
@@ -22,7 +21,7 @@ def average_log(filename, foldername):
     # Based On Highest Index
     highestCount = 0
     currCount = 1
-    jobCount = 0
+    jobCount = 1
 
     for i in range(1, len(log)):
         prevLine = log[i-1]
@@ -41,16 +40,16 @@ def average_log(filename, foldername):
 
     # Create based on highest index
     for line in log:
-        idx = line[0]/1000 - 1
+        idx = int(line[0]/1000) - 1
         if (idx < highestCount):
-            try:
-                newLog[idx][1] += line[1]
-            except:
-                print(idx)
+            newLog[idx][1] += line[1]
     
     # Calculate average
+    # print(jobCount)
     for line in newLog:
         line[1] = line[1]/jobCount
+
+    # print(newLog)
 
     # Create folder if not exists
     folder_path = './combine/' + foldername

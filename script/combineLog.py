@@ -1,5 +1,4 @@
 import os
-import sys
 
 def combine_log(filename, foldername):
 
@@ -53,7 +52,7 @@ def combine_log(filename, foldername):
 
     # Create based on highest index
     for line in log:
-        idx = line[0]/1000 - 1
+        idx = int(line[0]/1000) - 1
         if (idx < highestCount):
             try:
                 newLog[idx][1] += line[1]
