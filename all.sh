@@ -21,14 +21,14 @@ STATDIR=$TOPDIR/stat
 # TODO: set the following params
 #-------------------------------------------------------------------------------
 # Set TARGET to the expriment folder (the subfolder under raw/)
-TARGET="lat6-bw"
+TARGET="iou-16-lat"
 
 # Supported TYPE:
 # lat-cdf: Latency CDF graph
 # lat-time: Latency (Y-axis) vs Time (X-axis)
 # iops-time: IOPS (Y-axis) vs Time (X-axis)
 # bw-time: Bandwidth (Y-axis) vs Time (X-axis)
-TYPE="bw-time"
+TYPE="lat-time"
 #-------------------------------------------------------------------------------
 
 # combine log

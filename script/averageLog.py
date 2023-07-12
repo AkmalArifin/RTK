@@ -1,10 +1,11 @@
 import os
 
 def average_log(filename, foldername):
-
     # Open file for reading
     input_filename = './raw/' + foldername + '/' + filename
-    file = open(input_filename, 'r')
+    print("FILENAME: ", input_filename)
+    file = open(input_filename, 'r', encoding='utf-8', errors='ignore')
+
 
     # Pass data from file to log array
     log = []
